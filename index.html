@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Dinner Club × Grand Hyatt KL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1E3B1E;
+    --green-mid: #2a4d2a;
+    --green-light: #4A6741;
+    --coral: #CF4928;
+    --coral-dim: rgba(207,73,40,0.15);
+    --chili: #E0271A;
+    --white: #F5F0EB;
+    --white-dim: rgba(245,240,235,0.6);
+    --white-faint: rgba(245,240,235,0.12);
+    --gold: #C9A84C;
+    --gold-dim: rgba(201,168,76,0.15);
+    --near-black: #0D0D0D;
+    --ease-out: cubic-bezier(0.23,1,0.32,1);
+    --ease-drawer: cubic-bezier(0.32,0.72,0,1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--green);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--coral);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+    mix-blend-mode: normal;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(207,73,40,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: transform 0.15s var(--ease-out), width 0.3s, height 0.3s, opacity 0.3s;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--coral);
+    z-index: 1000;
+    transition: width 0.3s var(--ease-out);
+    transform-origin: left;
+  }
+
+  /* Slide counter */
+  .slide-counter {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--white-dim);
+    letter-spacing: 0.1em;
+    z-index: 1000;
+  }
+
+  /* Nav dots */
+  .nav-dots {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 1000;
+  }
+  .nav-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--white-dim);
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+  }
+  .nav-dot.active {
+    background: var(--coral);
+    transform: scale(1.8);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 2rem;
+  }
+
+  .container { max-width: 1100px; width: 100%; margin: 0 auto; }
+
+  /* Noise overlay */
+  section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 1;
+  }
+
+  section > * { position: relative; z-index: 2; }
+
+  /* ── S1: COVER ── */
+  #s1 {
+    background: var(--near-black);
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cover-ambient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(30,59,30,0.7) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 20% 80%, rgba(207,73,40,0.08) 0%, transparent 60%);
+    animation: ambientDrift 12s ease-in-out infinite alternate;
+  }
+  @keyframes ambientDrift {
+    0% { transform: scale(1) translate(0,0); }
+    100% { transform: scale(1.05) translate(1%,1%); }
+  }
+
+  .dual-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    transform: translateY(-16px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  }
+  .dual-logo.visible { opacity: 1; transform: translateY(0); }
+
+  .tdc-logo-wrap { display: flex; flex-direction: column; align-items: center; }
+
+  /* TDC SVG Logo */
+  .tdc-logo { width: 90px; height: 90px; }
+
+  .logo-divider {
+    width: 1px;
+    height: 56px;
+    background: linear-gradient(to bottom, transparent, var(--white-dim), transparent);
+  }
+
+  .gh-logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .gh-diamond {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--gold);
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  .gh-diamond::before {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    background: var(--gold);
+    transform: none;
+    opacity: 0.3;
+  }
+  .gh-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .gh-city {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: rgba(201,168,76,0.6);
+    text-transform: uppercase;
+  }
+
+  .cover-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--coral);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s 0.4s var(--ease-out), transform 0.6s 0.4s var(--ease-out);
+  }
+  .cover-eyebrow.visible { opacity: 1; transform: translateY(0); }
+
+  .cover-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s 0.6s var(--ease-out), transform 0.8s 0.6s var(--ease-out);
+  }
+  .cover-title.visible { opacity: 1; transform: translateY(0); }
+  .cover-title .accent { color: var(--coral); }
+  .cover-title .gold { color: var(--gold); }
+
+  .cover-sub {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--white-dim);
+    letter-spacing: 0.04em;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s 0.9s var(--ease-out), transform 0.6s 0.9s var(--ease-out);
+  }
+  .cover-sub.visible { opacity: 1; transform: translateY(0); }
+
+  .cover-tags {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    transition: opacity 0.6s 1.1s var(--ease-out);
+  }
+  .cover-tags.visible { opacity: 1; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--white-faint);
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    color: var(--white-dim);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.6s 1.4s;
+  }
+  .scroll-hint.visible { opacity: 0.4; }
+  .scroll-hint span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--white), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.2); }
+  }
+
+  /* ── DIVIDER SLIDES ── */
+  .divider-slide {
+    background: var(--coral);
+    flex-direction: column;
+    text-align: left;
+    padding-left: clamp(3rem, 8vw, 8rem);
+  }
+  .divider-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(5rem, 14vw, 12rem);
+    font-weight: 500;
+    color: rgba(245,240,235,0.15);
+    line-height: 1;
+    margin-bottom: -0.3em;
+    display: block;
+  }
+  .divider-label {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+
+  /* ── S2: WHO WE ARE ── */
+  #s2 { background: var(--green); }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 1.2rem;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.8rem;
+    color: var(--white);
+  }
+  .section-title .accent { color: var(--coral); }
+  .section-body {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--white-dim);
+    max-width: 52ch;
+  }
+  .section-body p + p { margin-top: 1rem; }
+
+  .stat-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .stat-item { border-left: 2px solid var(--coral); padding-left: 1.2rem; }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--white);
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--white-dim);
+    margin-top: 0.2rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── S3: CONCEPT DIVIDER ── */
+  #s3 { background: var(--coral); }
+
+  /* ── S4: THE CONCEPT ── */
+  #s4 { background: var(--near-black); }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--white-faint);
+    margin-top: 3rem;
+    border: 1px solid var(--white-faint);
+  }
+  .concept-cell {
+    background: var(--near-black);
+    padding: 2.5rem;
+  }
+  .cell-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--coral);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .cell-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--white);
+  }
+  .cell-body {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--white-dim);
+  }
+
+  /* ── S5: EXPERIENCE ── */
+  #s5 { background: var(--green); }
+
+  .experience-timeline {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .exp-step {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--white-faint);
+  }
+  .exp-step:last-child { border-bottom: none; }
+  .exp-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--coral);
+    padding-top: 0.2rem;
+    letter-spacing: 0.1em;
+  }
+  .exp-content-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: var(--white);
+  }
+  .exp-content-body {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--white-dim);
+  }
+
+  /* ── S6: WHY GRAND HYATT ── */
+  #s6 { background: #0A0F18; }
+
+  .synergy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .synergy-card {
+    border: 1px solid var(--gold-dim);
+    padding: 2rem;
+    background: rgba(201,168,76,0.03);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .synergy-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.06);
+  }
+  .synergy-icon {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold-dim);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+  }
+  .synergy-icon span { transform: rotate(-45deg); font-size: 0.75rem; color: var(--gold); }
+  .synergy-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .synergy-body { font-size: 0.8rem; line-height: 1.65; color: rgba(245,240,235,0.5); }
+
+  /* ── S7: MARKETING ── */
+  #s7 { background: var(--green); }
+
+  .marketing-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+  .mkt-block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--coral-dim);
+  }
+  .mkt-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .mkt-list li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--white-dim);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .mkt-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 5px; height: 5px;
+    background: var(--coral);
+    border-radius: 50%;
+  }
+  .mkt-list li strong { color: var(--white); font-weight: 500; }
+
+  /* ── S8: GLOBAL OPPORTUNITY ── */
+  #s8 { background: var(--near-black); }
+
+  .world-stage {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  .city-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+  .city-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--white-faint);
+    color: var(--white-dim);
+    transition: all 0.3s var(--ease-out);
+  }
+  .city-chip.highlight {
+    border-color: var(--coral);
+    color: var(--coral);
+    background: var(--coral-dim);
+  }
+  .city-chip:hover {
+    border-color: var(--white-dim);
+    color: var(--white);
+  }
+
+  .opportunity-quote {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    border-left: 3px solid var(--coral);
+    text-align: left;
+  }
+  .oq-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    line-height: 1.4;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .oq-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--coral);
+    text-transform: uppercase;
+  }
+
+  /* ── S9: WHAT WE NEED ── */
+  #s9 { background: var(--green-mid); }
+
+  .needs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--white-faint);
+    margin-top: 3rem;
+    border: 1px solid var(--white-faint);
+  }
+  .need-cell {
+    background: var(--green-mid);
+    padding: 2.2rem 2.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+  .need-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--coral);
+    padding-top: 0.15rem;
+    flex-shrink: 0;
+    letter-spacing: 0.1em;
+  }
+  .need-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .need-body { font-size: 0.8rem; line-height: 1.6; color: var(--white-dim); }
+
+  /* ── S10: CLOSE ── */
+  #s10 { background: var(--near-black); text-align: center; flex-direction: column; }
+
+  .close-ambient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(30,59,30,0.6) 0%, transparent 70%);
+    animation: ambientDrift 10s ease-in-out infinite alternate;
+  }
+
+  .close-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 2rem;
+  }
+  .close-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+  .close-title .accent { color: var(--coral); }
+  .close-sub {
+    font-size: 0.9rem;
+    color: var(--white-dim);
+    margin-bottom: 3rem;
+    max-width: 44ch;
+    line-height: 1.7;
+  }
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+  .contact-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--white);
+  }
+  .contact-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--white-dim);
+    text-transform: uppercase;
+  }
+  .contact-email {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--coral);
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--coral);
+    border: none;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.2s;
+    text-decoration: none;
+  }
+  .cta-btn:hover { background: #b83d1f; transform: scale(1.02); }
+  .cta-btn:active { transform: scale(0.97); }
+
+  .close-footer {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    color: var(--white-dim);
+    text-transform: uppercase;
+    opacity: 0.4;
+    white-space: nowrap;
+  }
+
+  /* ── ANIMATION CLASSES ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+  .reveal-delay-6 { transition-delay: 0.6s; }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+  /* Divider entrance */
+  .divider-num-anim {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  }
+  .divider-num-anim.visible { opacity: 1; transform: translateX(0); }
+  .divider-label-anim {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s 0.15s var(--ease-out), transform 0.6s 0.15s var(--ease-out);
+  }
+  .divider-label-anim.visible { opacity: 1; transform: translateY(0); }
+
+  /* Count up */
+  .count-up { font-variant-numeric: tabular-nums; }
+
+  /* Grid stagger */
+  .stagger-child {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .stagger-parent.visible .stagger-child {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  }
+  .stagger-parent.visible .stagger-child:nth-child(1) { transition-delay: 0.05s; }
+  .stagger-parent.visible .stagger-child:nth-child(2) { transition-delay: 0.12s; }
+  .stagger-parent.visible .stagger-child:nth-child(3) { transition-delay: 0.19s; }
+  .stagger-parent.visible .stagger-child:nth-child(4) { transition-delay: 0.26s; }
+  .stagger-parent.visible .stagger-child:nth-child(5) { transition-delay: 0.33s; }
+  .stagger-parent.visible .stagger-child:nth-child(6) { transition-delay: 0.40s; }
+
+  /* Chili idle */
+  @keyframes chiliIdle {
+    0%, 100% { transform: rotate(-3deg) scale(1); }
+    25%       { transform: rotate(2deg) scale(1.02); }
+    50%       { transform: rotate(-1deg) scale(0.99); }
+    75%       { transform: rotate(3deg) scale(1.01); }
+  }
+  .chili-idle { animation: chiliIdle 3.5s ease-in-out infinite; display: inline-block; transform-origin: center bottom; }
+
+  @media (max-width: 768px) {
+    .two-col, .marketing-cols, .needs-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .concept-grid, .synergy-grid { grid-template-columns: 1fr; }
+    .synergy-grid { grid-template-columns: 1fr 1fr; }
+    .nav-dots { display: none; }
+    .slide-counter { right: 1rem; bottom: 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+    .reveal, .reveal-left, .divider-num-anim, .divider-label-anim, .dual-logo,
+    .cover-eyebrow, .cover-title, .cover-sub, .cover-tags, .scroll-hint {
+      opacity: 1 !important; transform: none !important;
+    }
+    .stagger-child { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="nav-dots" id="navDots"></nav>
+<div class="slide-counter" id="slideCounter">01 / 10</div>
+
+<!-- ══ S1: COVER ══ -->
+<section id="s1">
+  <div class="cover-ambient"></div>
+
+  <div class="dual-logo" id="dualLogo">
+    <!-- TDC Logo -->
+    <div class="tdc-logo-wrap">
+      <svg class="tdc-logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="58" fill="#1E3B1E" stroke="rgba(245,240,235,0.1)" stroke-width="0.5"/>
+        <!-- "the" script -->
+        <text id="the-script" x="60" y="34" text-anchor="middle"
+          font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#CF4928" font-weight="400"
+          style="transform-origin: 60px 34px;">the</text>
+        <!-- Dinner -->
+        <text x="60" y="58" text-anchor="middle"
+          font-family="Fraunces, serif" font-size="22" fill="#F5F0EB" font-weight="900"
+          letter-spacing="-0.5" style="transform-origin: 60px 58px;">DINNER</text>
+        <!-- Club -->
+        <text x="60" y="76" text-anchor="middle"
+          font-family="Fraunces, serif" font-size="22" fill="#F5F0EB" font-weight="900"
+          letter-spacing="-0.5" style="transform-origin: 60px 76px;">CLUB</text>
+        <!-- Singapore -->
+        <text x="60" y="94" text-anchor="middle"
+          font-family="DM Sans, sans-serif" font-size="7" fill="rgba(245,240,235,0.5)" font-weight="300"
+          letter-spacing="3">SINGAPORE</text>
+        <!-- Chili -->
+        <g id="chili-pepper" class="chili-idle" style="transform-origin: 96px 68px;">
+          <ellipse cx="96" cy="68" rx="4" ry="7" fill="#E0271A" transform="rotate(-20 96 68)"/>
+          <path d="M96 61 Q100 56 103 54" stroke="#CF4928" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="logo-divider"></div>
+
+    <!-- Grand Hyatt KL -->
+    <div class="gh-logo-wrap">
+      <div class="gh-diamond"><span>◆</span></div>
+      <span class="gh-name">Grand Hyatt</span>
+      <span class="gh-city">Kuala Lumpur</span>
+    </div>
+  </div>
+
+  <div style="text-align:center; position:relative; z-index:2;">
+    <div class="cover-eyebrow" id="coverEyebrow">A Collaboration Proposal</div>
+    <h1 class="cover-title" id="coverTitle">
+      KL's first<br>
+      <span class="accent">Dinner Club</span><br>
+      <span class="gold">supper club</span>
+    </h1>
+    <p class="cover-sub" id="coverSub">Two nights. Limited seats. The beginning of something bigger.</p>
+    <div class="cover-tags" id="coverTags">
+      <span class="tag">2 nights</span>
+      <span class="tag">Kuala Lumpur</span>
+      <span class="tag">Chef collaboration</span>
+      <span class="tag">Limited seats</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint" id="scrollHint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══ S2: WHO WE ARE ══ -->
+<section id="s2">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="section-eyebrow reveal">Who we are</div>
+        <h2 class="section-title reveal reveal-delay-1">
+          We aren't a brand.<br>We're a <span class="accent">table</span>.
+        </h2>
+        <div class="section-body reveal reveal-delay-2">
+          <p>The Dinner Club started in a Singapore apartment with no guest list, no PR, and no plan. Stefan cooked. Wendy hosted. Strangers came. Somewhere between dessert and bottle number two, they became friends.</p>
+          <p>That instinct became something intentional. Every dinner since has been the same thing: real food, real conversation, the kind of evening people talk about for months.</p>
+          <p>Stefan brings Michelin kitchen credentials — Alchemist Copenhagen, De Librije, Bord'eau Amsterdam — and the rare thing you can't train: knowing when to trust the table over the technique.</p>
+        </div>
+      </div>
+      <div class="stat-stack stagger-parent">
+        <div class="stat-item stagger-child">
+          <div class="stat-num count-up" data-target="100">0</div>
+          <div class="stat-label">Dinners hosted in Singapore</div>
+        </div>
+        <div class="stat-item stagger-child">
+          <div class="stat-num">5★</div>
+          <div class="stat-label">Michelin kitchen background</div>
+        </div>
+        <div class="stat-item stagger-child">
+          <div class="stat-num count-up" data-target="12">0</div>
+          <div class="stat-label">Max seats per dinner</div>
+        </div>
+        <div class="stat-item stagger-child">
+          <div class="stat-num">0%</div>
+          <div class="stat-label">Empty seats, ever</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S3: DIVIDER ══ -->
+<section id="s3" class="divider-slide">
+  <div>
+    <span class="divider-num divider-num-anim">01</span>
+    <h2 class="divider-label divider-label-anim">The concept</h2>
+  </div>
+</section>
+
+<!-- ══ S4: THE CONCEPT ══ -->
+<section id="s4">
+  <div class="container">
+    <div class="section-eyebrow reveal">What we're proposing</div>
+    <h2 class="section-title reveal reveal-delay-1">
+      The Dinner Club<br>comes to <span class="accent">Kuala Lumpur</span>
+    </h2>
+    <p class="section-body reveal reveal-delay-2" style="margin-bottom:0">
+      Two nights. Two seatings. A supper club format that doesn't exist in KL yet — intimate, chef-led, ticketed, full. Not a pop-up. Not an event. A room that feels like the best dinner party you've ever been to, at a hotel that knows how to hold that energy.
+    </p>
+    <div class="concept-grid stagger-parent" style="margin-top:2.5rem">
+      <div class="concept-cell stagger-child">
+        <span class="cell-icon">Night 01</span>
+        <div class="cell-title">Industry & Press Night</div>
+        <div class="cell-body">Invite the room that shapes KL's food conversation. Chefs, editors, food writers, hotel F&B leads. Set the tone before the public seats fill. Let word-of-mouth do the rest.</div>
+      </div>
+      <div class="concept-cell stagger-child">
+        <span class="cell-icon">Night 02</span>
+        <div class="cell-title">Public Supper Club</div>
+        <div class="cell-body">Open waitlist. Full reservation within days. Every seat filled with someone who chose to be there. The energy in the room when a table wants to be exactly where it is — that's the whole thing.</div>
+      </div>
+      <div class="concept-cell stagger-child">
+        <span class="cell-icon">Format</span>
+        <div class="cell-title">Multi-course chef's menu</div>
+        <div class="cell-body">Stefan works with the Grand Hyatt KL kitchen team to create a menu that's honest about where it comes from — Singapore sensibility, KL ingredients, European technique. One seating per night. 25–40 covers.</div>
+      </div>
+      <div class="concept-cell stagger-child">
+        <span class="cell-icon">Drinks</span>
+        <div class="cell-title">Wine & drinks on the night</div>
+        <div class="cell-body">Thoughtfully paired and available on the evening. Not the story we tell going in — the surprise when people arrive. Let the food lead the conversation before the drinks join it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S5: THE EXPERIENCE ══ -->
+<section id="s5">
+  <div class="container">
+    <div class="two-col" style="gap:4rem; align-items:start;">
+      <div>
+        <div class="section-eyebrow reveal">The guest journey</div>
+        <h2 class="section-title reveal reveal-delay-1">
+          What it feels<br>like to <span class="accent">be there</span>
+        </h2>
+        <p class="section-body reveal reveal-delay-2">
+          The Dinner Club doesn't feel like a restaurant dinner. It doesn't feel like a hotel event. It feels like being let in on something. Every detail is designed to make the table feel like the only table in the world.
+        </p>
+      </div>
+      <div class="experience-timeline stagger-parent">
+        <div class="exp-step stagger-child">
+          <span class="exp-num">01</span>
+          <div>
+            <div class="exp-content-title">The arrival</div>
+            <div class="exp-content-body">Guests don't walk into a restaurant. They walk into a room that's already warm. Music low, candles lit, the kitchen already moving. The atmosphere says: you're exactly where you're supposed to be.</div>
+          </div>
+        </div>
+        <div class="exp-step stagger-child">
+          <span class="exp-num">02</span>
+          <div>
+            <div class="exp-content-title">The welcome</div>
+            <div class="exp-content-body">Wendy hosts. Stefan introduces. Not a speech — a conversation. The kind of table talk that makes strangers turn to each other before the first course is down.</div>
+          </div>
+        </div>
+        <div class="exp-step stagger-child">
+          <span class="exp-num">03</span>
+          <div>
+            <div class="exp-content-title">The menu</div>
+            <div class="exp-content-body">Multi-course, story-driven. Stefan and the Grand Hyatt KL chef team cook together. Each dish has a reason. The table learns it as the night unfolds.</div>
+          </div>
+        </div>
+        <div class="exp-step stagger-child">
+          <span class="exp-num">04</span>
+          <div>
+            <div class="exp-content-title">The moment</div>
+            <div class="exp-content-body">Somewhere between the main and dessert, the room changes. The volume lifts. People who didn't know each other an hour ago are making plans for next week. That's the whole point.</div>
+          </div>
+        </div>
+        <div class="exp-step stagger-child">
+          <span class="exp-num">05</span>
+          <div>
+            <div class="exp-content-title">The close</div>
+            <div class="exp-content-body">No rush. No bill-drop energy. The evening ends when the room decides it should. Guests leave with something to talk about. That's how the waitlist for the next one fills itself.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S6: WHY GRAND HYATT ══ -->
+<section id="s6">
+  <div class="container">
+    <div class="section-eyebrow reveal" style="color:var(--gold)">Why this partnership works</div>
+    <h2 class="section-title reveal reveal-delay-1">
+      Grand Hyatt KL<br>is the <span style="color:var(--gold)">right room</span>
+    </h2>
+    <p class="section-body reveal reveal-delay-2" style="max-width:58ch;">
+      The Dinner Club brings the energy, the format, and the following. Grand Hyatt brings the kitchen, the space, the service infrastructure, and the address that signals this is serious. Neither of us could do what this becomes, alone.
+    </p>
+    <div class="synergy-grid stagger-parent">
+      <div class="synergy-card stagger-child">
+        <div class="synergy-icon"><span>⊹</span></div>
+        <div class="synergy-title">World-class kitchen</div>
+        <div class="synergy-body">Stefan's menus demand precision equipment and a brigade that can hold the line. Grand Hyatt KL's kitchen team is exactly that — and the collaboration with them is part of the story.</div>
+      </div>
+      <div class="synergy-card stagger-child">
+        <div class="synergy-icon"><span>⊹</span></div>
+        <div class="synergy-title">Central KL address</div>
+        <div class="synergy-body">The Dinner Club draws people who want to be somewhere worth going. Grand Hyatt KL is an address the city already trusts. That combination sells itself.</div>
+      </div>
+      <div class="synergy-card stagger-child">
+        <div class="synergy-icon"><span>⊹</span></div>
+        <div class="synergy-title">5-star service</div>
+        <div class="synergy-body">Supper club energy lives or dies on the room's ability to make guests feel looked after without making them feel managed. Grand Hyatt's service culture is built for exactly that.</div>
+      </div>
+      <div class="synergy-card stagger-child">
+        <div class="synergy-icon"><span>⊹</span></div>
+        <div class="synergy-title">Built-in credibility</div>
+        <div class="synergy-body">The Dinner Club's name on a Grand Hyatt reservation carries a signal: this isn't a casual dinner. The two brands together raise the perceived value of both.</div>
+      </div>
+      <div class="synergy-card stagger-child">
+        <div class="synergy-icon"><span>⊹</span></div>
+        <div class="synergy-title">Existing audience</div>
+        <div class="synergy-body">The Dinner Club brings a loyal following from Singapore that travels. KL is 45 minutes by air. Expect cross-border guests to fill a meaningful share of the public night.</div>
+      </div>
+      <div class="synergy-card stagger-child">
+        <div class="synergy-icon"><span>⊹</span></div>
+        <div class="synergy-title">Global pipeline</div>
+        <div class="synergy-body">One successful run in KL is a proof of concept for every Grand Hyatt city in the world. We're not pitching a dinner. We're pitching a format that scales.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S7: MARKETING ══ -->
+<section id="s7">
+  <div class="container">
+    <div class="section-eyebrow reveal">How we get the room full</div>
+    <h2 class="section-title reveal reveal-delay-1">
+      Marketing that<br>doesn't feel like <span class="accent">marketing</span>
+    </h2>
+    <div class="marketing-cols">
+      <div class="reveal reveal-delay-2">
+        <div class="mkt-block-title">What we do</div>
+        <ul class="mkt-list">
+          <li><strong>Social-first announcement</strong> — teaser post from @thedinnerclub.sg + @stefankam before a single ticket goes on sale. The waitlist fills before we open anything.</li>
+          <li><strong>Behind-the-scenes content</strong> — Stefan and the Grand Hyatt KL chefs in the kitchen together. This is the content that travels. Two chef worlds colliding is a story people share.</li>
+          <li><strong>Press and PR</strong> — KL food press, lifestyle media, hotel trade coverage. Night 01 with industry guests becomes the press drop.</li>
+          <li><strong>Cross-border reach</strong> — Singapore audience sees the KL dates. KL audience sees the Singapore pedigree. Both sell the other.</li>
+          <li><strong>Waitlist strategy</strong> — opens 3 weeks before. Scarcity drives demand. No discount, no early-bird. If it sells out faster than expected, that's the story.</li>
+        </ul>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <div class="mkt-block-title">What we don't do</div>
+        <ul class="mkt-list">
+          <li><strong>No alcohol in marketing comms</strong> — all promotion, social posts, and PR focus on the food, the chefs, and the experience. What's available on the night stays on the night.</li>
+          <li><strong>No "exclusive" or "curated" language</strong> — this isn't a velvet rope. The copy sounds like a smart friend telling you about the best dinner they've ever been to.</li>
+          <li><strong>No hotel-brochure photography</strong> — content is candid, warm, real. Plating shots, kitchen chaos, the moment someone laughs at a table. Not staged wide shots of an empty room.</li>
+          <li><strong>No generic event listings</strong> — we don't list on aggregator sites. Discovery is word of mouth and social. That's what keeps the waitlist honest.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S8: GLOBAL OPPORTUNITY ══ -->
+<section id="s8">
+  <div class="container">
+    <div class="section-eyebrow reveal" style="color:var(--gold)">If KL sells out</div>
+    <h2 class="section-title reveal reveal-delay-1">
+      KL is <span class="accent">chapter one</span>
+    </h2>
+    <p class="section-body reveal reveal-delay-2" style="max-width:56ch; margin-bottom:0;">
+      Two sold-out nights in Kuala Lumpur proves the format works in a new market. That's the proof of concept every Grand Hyatt property in the world needs to say yes to the same conversation.
+    </p>
+    <div class="world-stage reveal reveal-delay-3">
+      <div class="city-row">
+        <div class="city-chip highlight">Kuala Lumpur ← start here</div>
+        <div class="city-chip">Singapore</div>
+        <div class="city-chip">Tokyo</div>
+        <div class="city-chip">Dubai</div>
+        <div class="city-chip">London</div>
+        <div class="city-chip">New York</div>
+        <div class="city-chip">Hong Kong</div>
+        <div class="city-chip">Sydney</div>
+        <div class="city-chip">Berlin</div>
+        <div class="city-chip">Jakarta</div>
+      </div>
+      <div class="opportunity-quote">
+        <p class="oq-text">"One table, one city, one night done right — that's how every great dining institution started. KL is where this one begins."</p>
+        <span class="oq-attr">Stefan Kam — Culinary Director, The Dinner Club</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S9: WHAT WE NEED ══ -->
+<section id="s9">
+  <div class="container">
+    <div class="section-eyebrow reveal">What makes this possible</div>
+    <h2 class="section-title reveal reveal-delay-1">
+      What we need<br>from <span class="accent">Grand Hyatt KL</span>
+    </h2>
+    <p class="section-body reveal reveal-delay-2" style="margin-bottom:0;">
+      We bring the concept, the content, the chef, the host, and the audience. Here's what the partnership needs from your side to make two nights of KL's best supper club happen.
+    </p>
+    <div class="needs-grid stagger-parent">
+      <div class="need-cell stagger-child">
+        <span class="need-num">01</span>
+        <div>
+          <div class="need-title">Space & atmosphere</div>
+          <div class="need-body">A private dining room or configurable space that seats 25–40 for two evenings. Lighting that can go low. A room that can feel like it belongs to the guests for the night.</div>
+        </div>
+      </div>
+      <div class="need-cell stagger-child">
+        <span class="need-num">02</span>
+        <div>
+          <div class="need-title">Kitchen access & collaboration</div>
+          <div class="need-body">Stefan works alongside the Grand Hyatt KL kitchen team. Joint menu development, shared prep time in the days before. The collaboration is real — not symbolic.</div>
+        </div>
+      </div>
+      <div class="need-cell stagger-child">
+        <span class="need-num">03</span>
+        <div>
+          <div class="need-title">F&B partnership</div>
+          <div class="need-body">Front-of-house service managed by Grand Hyatt's team. F&B (including wine and drinks available on the night) structured as a revenue-share or fixed arrangement — open to discussion.</div>
+        </div>
+      </div>
+      <div class="need-cell stagger-child">
+        <span class="need-num">04</span>
+        <div>
+          <div class="need-title">Co-promotion</div>
+          <div class="need-body">Grand Hyatt KL shares across their owned channels — social, email, in-hotel. Not alcohol-led. Focused on the experience, the chefs, and the format. We handle the full content creation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S10: CLOSE ══ -->
+<section id="s10">
+  <div class="close-ambient"></div>
+  <div class="container" style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+    <div class="close-tag reveal">The Dinner Club × Grand Hyatt KL</div>
+    <h2 class="close-title reveal reveal-delay-1">
+      Let's make KL<br>the first <span class="accent">chapter</span>
+    </h2>
+    <p class="close-sub reveal reveal-delay-2">
+      Two nights. A full room. The kind of evening people talk about for months. Then we do it again — in the next city, and the one after that.
+    </p>
+    <div class="contact-block reveal reveal-delay-3">
+      <div class="contact-name">Stefan Kam</div>
+      <div class="contact-role">Culinary Director & Co-Founder — The Dinner Club SG</div>
+      <div class="contact-email">hello@thedinnerclub.sg</div>
+    </div>
+    <a class="cta-btn reveal reveal-delay-4" href="mailto:hello@thedinnerclub.sg">Get in touch</a>
+  </div>
+  <div class="close-footer">The Dinner Club SG × Grand Hyatt Kuala Lumpur — Confidential Proposal 2025</div>
+</section>
+
+<script>
+// ── Cursor ──
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+(function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) *.12;
+  cursorRing.style.left = rx + 'px';
+  cursorRing.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a, button, .nav-dot, .synergy-card, .city-chip').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2.5)'; cursorRing.style.opacity = '0'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; cursorRing.style.opacity = '1'; });
+});
+
+// ── Sections setup ──
+const sections = Array.from(document.querySelectorAll('section'));
+const navDotsEl = document.getElementById('navDots');
+const progressBar = document.getElementById('progressBar');
+const slideCounterEl = document.getElementById('slideCounter');
+
+sections.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot';
+  dot.addEventListener('click', () => sections[i].scrollIntoView({ behavior: 'smooth' }));
+  navDotsEl.appendChild(dot);
+});
+const dots = Array.from(navDotsEl.querySelectorAll('.nav-dot'));
+
+// ── IntersectionObserver for scroll reveals ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal, .reveal-left, .divider-num-anim, .divider-label-anim, .stagger-parent').forEach(el => revealObs.observe(el));
+
+// ── Active section tracking ──
+let currentSection = 0;
+const sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = sections.indexOf(e.target);
+      if (idx !== -1) {
+        currentSection = idx;
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        const pct = ((idx + 1) / sections.length) * 100;
+        progressBar.style.width = pct + '%';
+        slideCounterEl.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(sections.length).padStart(2,'0');
+      }
+    }
+  });
+}, { threshold: 0.5 });
+sections.forEach(s => sectionObs.observe(s));
+
+// ── Keyboard navigation ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+    sections[Math.min(currentSection + 1, sections.length - 1)].scrollIntoView({ behavior: 'smooth' });
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    sections[Math.max(currentSection - 1, 0)].scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// ── Cover entrance ──
+window.addEventListener('load', () => {
+  setTimeout(() => { document.getElementById('dualLogo').classList.add('visible'); }, 200);
+  setTimeout(() => { document.getElementById('coverEyebrow').classList.add('visible'); }, 500);
+  setTimeout(() => { document.getElementById('coverTitle').classList.add('visible'); }, 700);
+  setTimeout(() => { document.getElementById('coverSub').classList.add('visible'); }, 1000);
+  setTimeout(() => { document.getElementById('coverTags').classList.add('visible'); }, 1200);
+  setTimeout(() => { document.getElementById('scrollHint').classList.add('visible'); }, 1500);
+});
+
+// ── Count-up numbers ──
+function countUp(el, target, duration) {
+  let start = 0, startTime = null;
+  const step = timestamp => {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(step);
+}
+
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const target = parseInt(e.target.dataset.target);
+      countUp(e.target, target, 1000);
+      countObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.count-up[data-target]').forEach(el => countObs.observe(el));
+</script>
+</body>
+</html>
