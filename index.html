@@ -29,6 +29,15 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--green); color: var(--white); overflow-x: hidden; }
 
+  /* ── Persistent TDC watermark ── */
+  .tdc-watermark {
+    position: fixed; top: 1.4rem; left: 1.8rem; z-index: 999;
+    opacity: 0; transition: opacity 0.5s var(--ease-out);
+    pointer-events: none;
+  }
+  .tdc-watermark.show { opacity: 1; }
+  .tdc-watermark img { width: 52px; height: auto; display: block; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.5)); }
+
   /* Progress bar */
   .progress-bar {
     position: fixed; top: 0; left: 0; height: 2px;
@@ -105,20 +114,12 @@
     background: linear-gradient(to bottom, transparent, rgba(245,240,235,0.3), transparent);
   }
 
-  .gh-logo-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 0.15rem; }
-  .gh-eyeline {
-    font-family: 'DM Sans', sans-serif; font-weight: 300;
-    font-size: 0.5rem; letter-spacing: 0.4em; color: rgba(201,168,76,0.5);
-    text-transform: uppercase;
-  }
-  .gh-name {
-    font-family: 'Fraunces', serif; font-weight: 400;
-    font-size: 1.6rem; letter-spacing: -0.01em; color: var(--gold); line-height: 1;
-  }
+  .gh-logo-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+  .gh-wordmark { display: block; width: 210px; height: auto; }
   .gh-city {
     font-family: 'DM Sans', sans-serif; font-weight: 300;
-    font-size: 0.5rem; letter-spacing: 0.32em; color: rgba(201,168,76,0.55);
-    text-transform: uppercase; margin-top: 0.25rem;
+    font-size: 0.48rem; letter-spacing: 0.38em; color: rgba(255,255,255,0.38);
+    text-transform: uppercase; padding-left: 1px;
   }
 
   .cover-eyebrow {
@@ -512,6 +513,11 @@
 <nav class="nav-dots" id="navDots"></nav>
 <div class="slide-counter" id="slideCounter">01 / 10</div>
 
+<!-- TDC logo — persists on all slides except cover -->
+<div class="tdc-watermark" id="tdcWatermark">
+  <img src="logo.png" alt="The Dinner Club">
+</div>
+
 <!-- ══ S1: COVER ══ -->
 <section id="s1">
   <div class="cover-bg"></div>
@@ -524,8 +530,23 @@
       </div>
       <div class="logo-divider"></div>
       <div class="gh-logo-wrap">
-        <span class="gh-eyeline">A Hyatt Hotel</span>
-        <span class="gh-name">Grand Hyatt</span>
+        <!-- Grand Hyatt wordmark — GRAND | HYATT -->
+        <svg class="gh-wordmark" viewBox="0 0 210 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- GRAND -->
+          <text x="0" y="25"
+            font-family="'DM Sans', Arial, sans-serif"
+            font-weight="600" font-size="20"
+            fill="white" letter-spacing="5"
+            text-anchor="start">GRAND</text>
+          <!-- Vertical bar -->
+          <rect x="101" y="2" width="1.2" height="29" fill="rgba(255,255,255,0.45)"/>
+          <!-- HYATT -->
+          <text x="111" y="25"
+            font-family="'DM Sans', Arial, sans-serif"
+            font-weight="600" font-size="20"
+            fill="white" letter-spacing="5"
+            text-anchor="start">HYATT</text>
+        </svg>
         <span class="gh-city">Kuala Lumpur</span>
       </div>
     </div>
@@ -944,6 +965,9 @@ document.querySelectorAll('.reveal, .divider-num-anim, .divider-label-anim, .sta
 
 // Active section tracking
 let currentSection = 0;
+const tdcWatermark = document.getElementById('tdcWatermark');
+const coverSection = document.getElementById('s1');
+
 const sectionObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -953,6 +977,8 @@ const sectionObs = new IntersectionObserver(entries => {
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
         progressBar.style.width = ((idx + 1) / sections.length * 100) + '%';
         slideCounterEl.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(sections.length).padStart(2,'0');
+        // Show TDC watermark on all slides except cover
+        tdcWatermark.classList.toggle('show', e.target !== coverSection);
       }
     }
   });
