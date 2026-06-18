@@ -166,7 +166,12 @@
   .tdc-logo-wrap { display: flex; flex-direction: column; align-items: center; }
 
   /* TDC SVG Logo */
-  .tdc-logo { width: 90px; height: 90px; }
+  .tdc-logo-img {
+    width: 120px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 2px 12px rgba(0,0,0,0.4));
+  }
 
   .logo-divider {
     width: 1px;
@@ -177,41 +182,34 @@
   .gh-logo-wrap {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
+    align-items: flex-start;
+    gap: 0.2rem;
   }
-  .gh-diamond {
-    width: 32px; height: 32px;
-    border: 1.5px solid var(--gold);
-    transform: rotate(45deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 0.5rem;
-    position: relative;
-  }
-  .gh-diamond::before {
-    content: '';
-    position: absolute;
-    width: 16px; height: 16px;
-    background: var(--gold);
-    transform: none;
-    opacity: 0.3;
-  }
-  .gh-name {
+  .gh-eyeline {
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
-    font-size: 0.6rem;
-    letter-spacing: 0.35em;
-    color: var(--gold);
+    font-size: 0.55rem;
+    letter-spacing: 0.38em;
+    color: rgba(201,168,76,0.55);
     text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+  .gh-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 1.65rem;
+    letter-spacing: -0.01em;
+    color: var(--gold);
+    line-height: 1;
   }
   .gh-city {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.5rem;
-    letter-spacing: 0.2em;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
     color: rgba(201,168,76,0.6);
     text-transform: uppercase;
+    margin-top: 0.3rem;
   }
 
   .cover-eyebrow {
@@ -823,39 +821,16 @@
   <div class="cover-ambient"></div>
 
   <div class="dual-logo" id="dualLogo">
-    <!-- TDC Logo -->
+    <!-- TDC Logo — actual brand PNG -->
     <div class="tdc-logo-wrap">
-      <svg class="tdc-logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="60" cy="60" r="58" fill="#1E3B1E" stroke="rgba(245,240,235,0.1)" stroke-width="0.5"/>
-        <!-- "the" script -->
-        <text id="the-script" x="60" y="34" text-anchor="middle"
-          font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#CF4928" font-weight="400"
-          style="transform-origin: 60px 34px;">the</text>
-        <!-- Dinner -->
-        <text x="60" y="58" text-anchor="middle"
-          font-family="Fraunces, serif" font-size="22" fill="#F5F0EB" font-weight="900"
-          letter-spacing="-0.5" style="transform-origin: 60px 58px;">DINNER</text>
-        <!-- Club -->
-        <text x="60" y="76" text-anchor="middle"
-          font-family="Fraunces, serif" font-size="22" fill="#F5F0EB" font-weight="900"
-          letter-spacing="-0.5" style="transform-origin: 60px 76px;">CLUB</text>
-        <!-- Singapore -->
-        <text x="60" y="94" text-anchor="middle"
-          font-family="DM Sans, sans-serif" font-size="7" fill="rgba(245,240,235,0.5)" font-weight="300"
-          letter-spacing="3">SINGAPORE</text>
-        <!-- Chili -->
-        <g id="chili-pepper" class="chili-idle" style="transform-origin: 96px 68px;">
-          <ellipse cx="96" cy="68" rx="4" ry="7" fill="#E0271A" transform="rotate(-20 96 68)"/>
-          <path d="M96 61 Q100 56 103 54" stroke="#CF4928" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        </g>
-      </svg>
+      <img src="logo.png" alt="The Dinner Club Singapore" class="tdc-logo-img">
     </div>
 
     <div class="logo-divider"></div>
 
-    <!-- Grand Hyatt KL -->
+    <!-- Grand Hyatt KL — clean text, no fake logo -->
     <div class="gh-logo-wrap">
-      <div class="gh-diamond"><span>◆</span></div>
+      <span class="gh-eyeline">A Hyatt Hotel</span>
       <span class="gh-name">Grand Hyatt</span>
       <span class="gh-city">Kuala Lumpur</span>
     </div>
@@ -893,27 +868,27 @@
           We aren't a brand.<br>We're a <span class="accent">table</span>.
         </h2>
         <div class="section-body reveal reveal-delay-2">
-          <p>The Dinner Club started in a Singapore apartment with no guest list, no PR, and no plan. Stefan cooked. Wendy hosted. Strangers came. Somewhere between dessert and bottle number two, they became friends.</p>
-          <p>That instinct became something intentional. Every dinner since has been the same thing: real food, real conversation, the kind of evening people talk about for months.</p>
-          <p>Stefan brings Michelin kitchen credentials — Alchemist Copenhagen, De Librije, Bord'eau Amsterdam — and the rare thing you can't train: knowing when to trust the table over the technique.</p>
+          <p>The Dinner Club started in a Singapore apartment with no guest list, no PR, and no plan. Stefan cooked. Wendy hosted. Strangers came. By the time dessert was down, they were already friends.</p>
+          <p>That instinct became something intentional. Every dinner since has been the same thing: real food, real conversation, the kind of evening people talk about for months. Every seat, sold out — every time.</p>
+          <p>Stefan trained at Alchemist (Copenhagen, ★★), De Librije (Zwolle, ★★★), and Bord'eau (Amsterdam, ★★) before building The Dinner Club in Singapore. He's collaborated with brands including Pip's Deli, ANDWhipp, Table65, and Tippling Club.</p>
         </div>
       </div>
       <div class="stat-stack stagger-parent">
         <div class="stat-item stagger-child">
           <div class="stat-num count-up" data-target="100">0</div>
-          <div class="stat-label">Dinners hosted in Singapore</div>
+          <div class="stat-label">Personal dinners hosted by Stefan</div>
         </div>
         <div class="stat-item stagger-child">
-          <div class="stat-num">5★</div>
-          <div class="stat-label">Michelin kitchen background</div>
+          <div class="stat-num">3★★★</div>
+          <div class="stat-label">Michelin kitchens trained in</div>
         </div>
         <div class="stat-item stagger-child">
-          <div class="stat-num count-up" data-target="12">0</div>
-          <div class="stat-label">Max seats per dinner</div>
+          <div class="stat-num">1–2</div>
+          <div class="stat-label">Long tables per seating</div>
         </div>
         <div class="stat-item stagger-child">
-          <div class="stat-num">0%</div>
-          <div class="stat-label">Empty seats, ever</div>
+          <div class="stat-num">Sold out</div>
+          <div class="stat-label">Every single dinner, every time</div>
         </div>
       </div>
     </div>
@@ -941,13 +916,13 @@
     <div class="concept-grid stagger-parent" style="margin-top:2.5rem">
       <div class="concept-cell stagger-child">
         <span class="cell-icon">Night 01</span>
-        <div class="cell-title">Industry & Press Night</div>
-        <div class="cell-body">Invite the room that shapes KL's food conversation. Chefs, editors, food writers, hotel F&B leads. Set the tone before the public seats fill. Let word-of-mouth do the rest.</div>
+        <div class="cell-title">Supper Club — Night One</div>
+        <div class="cell-body">Open waitlist. Full seating. One or two long tables, everyone facing each other — no round tables, no separation. The format forces connection in a way a restaurant never could. Media and press are welcome to join as guests.</div>
       </div>
       <div class="concept-cell stagger-child">
         <span class="cell-icon">Night 02</span>
-        <div class="cell-title">Public Supper Club</div>
-        <div class="cell-body">Open waitlist. Full reservation within days. Every seat filled with someone who chose to be there. The energy in the room when a table wants to be exactly where it is — that's the whole thing.</div>
+        <div class="cell-title">Supper Club — Night Two</div>
+        <div class="cell-body">A second night means a second chance to fill the room with people who heard about the first. Waitlist overflow, word of mouth from the night before. By Night Two, the buzz is already doing the work.</div>
       </div>
       <div class="concept-cell stagger-child">
         <span class="cell-icon">Format</span>
@@ -955,9 +930,9 @@
         <div class="cell-body">Stefan works with the Grand Hyatt KL kitchen team to create a menu that's honest about where it comes from — Singapore sensibility, KL ingredients, European technique. One seating per night. 25–40 covers.</div>
       </div>
       <div class="concept-cell stagger-child">
-        <span class="cell-icon">Drinks</span>
-        <div class="cell-title">Wine & drinks on the night</div>
-        <div class="cell-body">Thoughtfully paired and available on the evening. Not the story we tell going in — the surprise when people arrive. Let the food lead the conversation before the drinks join it.</div>
+        <span class="cell-icon">The table</span>
+        <div class="cell-title">Long table. One conversation.</div>
+        <div class="cell-body">The Dinner Club is built around one or two long tables — not a room of separate parties. Strangers sit next to strangers. The format is the magic. By dessert, the whole table is one conversation.</div>
       </div>
     </div>
   </div>
@@ -1083,10 +1058,10 @@
       <div class="reveal reveal-delay-3">
         <div class="mkt-block-title">What we don't do</div>
         <ul class="mkt-list">
-          <li><strong>No alcohol in marketing comms</strong> — all promotion, social posts, and PR focus on the food, the chefs, and the experience. What's available on the night stays on the night.</li>
           <li><strong>No "exclusive" or "curated" language</strong> — this isn't a velvet rope. The copy sounds like a smart friend telling you about the best dinner they've ever been to.</li>
           <li><strong>No hotel-brochure photography</strong> — content is candid, warm, real. Plating shots, kitchen chaos, the moment someone laughs at a table. Not staged wide shots of an empty room.</li>
           <li><strong>No generic event listings</strong> — we don't list on aggregator sites. Discovery is word of mouth and social. That's what keeps the waitlist honest.</li>
+          <li><strong>Food and experience first, always</strong> — every piece of content leads with the meal, the people, and the evening. That's what travels. That's what sells the next seat.</li>
         </ul>
       </div>
     </div>
