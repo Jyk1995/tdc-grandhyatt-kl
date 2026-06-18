@@ -385,6 +385,42 @@
     letter-spacing: 0.04em;
   }
 
+  /* ── S2b: BRAND WORK ── */
+  .brand-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .brand-pill {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--white-dim);
+    border: 1px solid rgba(245,240,235,0.12);
+    padding: 0.5rem 1.2rem;
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .brand-pill:hover {
+    color: var(--white);
+    border-color: rgba(245,240,235,0.4);
+  }
+  .recognition-row { border-top: 1px solid rgba(245,240,235,0.08); padding-top: 2rem; }
+  .rec-item { display: flex; flex-direction: column; gap: 0.25rem; }
+  .rec-source {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--gold);
+  }
+  .rec-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,235,0.4);
+    text-transform: uppercase;
+  }
+
   /* ── S3: CONCEPT DIVIDER ── */
   #s3 { background: var(--coral); }
 
@@ -814,7 +850,7 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <nav class="nav-dots" id="navDots"></nav>
-<div class="slide-counter" id="slideCounter">01 / 10</div>
+<div class="slide-counter" id="slideCounter">01 / 11</div>
 
 <!-- ══ S1: COVER ══ -->
 <section id="s1">
@@ -869,8 +905,8 @@
         </h2>
         <div class="section-body reveal reveal-delay-2">
           <p>The Dinner Club started in a Singapore apartment with no guest list, no PR, and no plan. Stefan cooked. Wendy hosted. Strangers came. By the time dessert was down, they were already friends.</p>
-          <p>That instinct became something intentional. Every dinner since has been the same thing: real food, real conversation, the kind of evening people talk about for months. Every seat, sold out — every time.</p>
-          <p>Stefan trained at Alchemist (Copenhagen, ★★), De Librije (Zwolle, ★★★), and Bord'eau (Amsterdam, ★★) before building The Dinner Club in Singapore. He's collaborated with brands including Pip's Deli, ANDWhipp, Table65, and Tippling Club.</p>
+          <p>That instinct became something intentional. Every dinner since has been the same: real food, real conversation, the kind of evening people talk about for months. Every seat, sold out — every time.</p>
+          <p>Stefan trained across five Michelin-starred kitchens — including Ciel Bleu at Okura Hotel Amsterdam and La Rive at InterContinental Amstel. He knows how hotel kitchens work, and how to make them feel like anything but a hotel. His most recent role was Head Chef at Somma (Lo & Behold Group), recognised by Michelin Guide Singapore, Tatler Asia Pacific, and Condé Nast Traveler in 2025.</p>
         </div>
       </div>
       <div class="stat-stack stagger-parent">
@@ -879,8 +915,8 @@
           <div class="stat-label">Personal dinners hosted by Stefan</div>
         </div>
         <div class="stat-item stagger-child">
-          <div class="stat-num">3★★★</div>
-          <div class="stat-label">Michelin kitchens trained in</div>
+          <div class="stat-num">5★</div>
+          <div class="stat-label">Michelin kitchens, incl. two hotel restaurants</div>
         </div>
         <div class="stat-item stagger-child">
           <div class="stat-num">1–2</div>
@@ -890,6 +926,49 @@
           <div class="stat-num">Sold out</div>
           <div class="stat-label">Every single dinner, every time</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S2b: BRAND WORK ══ -->
+<section id="s2b" style="background: #0D0D0D;">
+  <div class="container">
+    <div class="section-eyebrow reveal">Brand collaborations</div>
+    <h2 class="section-title reveal reveal-delay-1">
+      The brands that have<br>pulled up a <span class="accent">chair</span>
+    </h2>
+    <p class="section-body reveal reveal-delay-2" style="margin-bottom: 2.5rem; max-width: 54ch;">
+      Private dining for luxury houses. Concept menus for global brands. Recognised work at Somma — Michelin Guide Singapore, Tatler Best New Restaurant Asia Pacific 2025, Condé Nast Traveler Hot List.
+    </p>
+    <div class="brand-grid stagger-parent reveal reveal-delay-3">
+      <div class="brand-pill stagger-child">Heineken</div>
+      <div class="brand-pill stagger-child">Hermès</div>
+      <div class="brand-pill stagger-child">Gucci</div>
+      <div class="brand-pill stagger-child">Louis Vuitton</div>
+      <div class="brand-pill stagger-child">Prada</div>
+      <div class="brand-pill stagger-child">Rolex</div>
+      <div class="brand-pill stagger-child">Audemars Piguet</div>
+      <div class="brand-pill stagger-child">Van Cleef &amp; Arpels</div>
+      <div class="brand-pill stagger-child">Oatside</div>
+      <div class="brand-pill stagger-child">Lo &amp; Behold Group</div>
+    </div>
+    <div class="recognition-row reveal" style="margin-top: 3rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+      <div class="rec-item">
+        <div class="rec-source">Michelin Guide</div>
+        <div class="rec-note">Singapore 2024/25 — Somma</div>
+      </div>
+      <div class="rec-item">
+        <div class="rec-source">Tatler Asia Pacific</div>
+        <div class="rec-note">Best New Restaurant 2025</div>
+      </div>
+      <div class="rec-item">
+        <div class="rec-source">Condé Nast Traveler</div>
+        <div class="rec-note">Hot List 2025</div>
+      </div>
+      <div class="rec-item">
+        <div class="rec-source">Gambero Rosso</div>
+        <div class="rec-note">Three Forks — highest rating</div>
       </div>
     </div>
   </div>
@@ -1020,13 +1099,13 @@
       </div>
       <div class="synergy-card stagger-child">
         <div class="synergy-icon"><span>⊹</span></div>
-        <div class="synergy-title">Built-in credibility</div>
-        <div class="synergy-body">The Dinner Club's name on a Grand Hyatt reservation carries a signal: this isn't a casual dinner. The two brands together raise the perceived value of both.</div>
+        <div class="synergy-title">Hotel kitchen experience</div>
+        <div class="synergy-body">Stefan trained at Ciel Bleu (Okura Hotel, Amsterdam ★★) and La Rive (InterContinental Amstel ★). He doesn't need to learn how hotel kitchens work — he knows how to make them feel like somewhere else entirely.</div>
       </div>
       <div class="synergy-card stagger-child">
         <div class="synergy-icon"><span>⊹</span></div>
-        <div class="synergy-title">Existing audience</div>
-        <div class="synergy-body">The Dinner Club brings a loyal following from Singapore that travels. KL is 45 minutes by air. Expect cross-border guests to fill a meaningful share of the public night.</div>
+        <div class="synergy-title">Cross-border audience</div>
+        <div class="synergy-body">The Dinner Club has a loyal following in Singapore that travels. KL is 45 minutes by air. Expect cross-border guests to fill a meaningful share of both nights.</div>
       </div>
       <div class="synergy-card stagger-child">
         <div class="synergy-icon"><span>⊹</span></div>
