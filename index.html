@@ -339,6 +339,51 @@
   .exp-content-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--white); }
   .exp-content-body { font-size: 0.85rem; line-height: 1.65; color: var(--white-dim); }
 
+  /* ── S4b: FOOD GALLERY ── */
+  #s4b {
+    background: var(--near-black);
+    padding: 4rem 0;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+  .gallery-header {
+    max-width: 1100px; width: 100%; margin: 0 auto 3rem;
+    padding: 0 2rem;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+  }
+  .gallery-title-block { flex: 1; }
+  .gallery-note {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    color: var(--white-dim); letter-spacing: 0.12em; max-width: 30ch; line-height: 1.7;
+    text-align: right;
+  }
+  .food-grid {
+    width: 100%; display: grid;
+    grid-template-columns: 1.1fr 0.75fr 0.75fr 1.1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+    height: 72vh;
+  }
+  .food-cell {
+    overflow: hidden; position: relative;
+  }
+  .food-cell img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.23,1,0.32,1), filter 0.4s;
+    filter: saturate(0.9) brightness(0.92);
+  }
+  .food-cell:hover img { transform: scale(1.04); filter: saturate(1.05) brightness(1); }
+  .food-cell.tall { grid-row: span 2; }
+  .food-cell-label {
+    position: absolute; bottom: 0.9rem; left: 1rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+    letter-spacing: 0.15em; color: rgba(245,240,235,0.5); text-transform: uppercase;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .food-cell:hover .food-cell-label { opacity: 1; }
+
   /* ── S5b: COMMUNITY ── */
   .community-stats {
     display: flex; align-items: flex-start; gap: 0; margin-bottom: 3rem;
@@ -535,7 +580,7 @@
 
 <div class="progress-bar" id="progressBar"></div>
 <nav class="nav-dots" id="navDots"></nav>
-<div class="slide-counter" id="slideCounter">01 / 12</div>
+<div class="slide-counter" id="slideCounter">01 / 13</div>
 
 <!-- TDC logo — persists on all slides except cover -->
 <div class="tdc-watermark" id="tdcWatermark">
@@ -613,7 +658,7 @@
       </div>
       <div>
         <div class="photo-block reveal reveal-delay-2">
-          <img src="img_stefan.jpg" alt="Stefan Kam in the kitchen">
+          <img src="img_kitchen.jpg" alt="Stefan Kam plating in the kitchen" style="object-position: center 20%;">
         </div>
         <div class="stat-stack stagger-parent" style="margin-top: 2rem;">
           <div class="stat-item stagger-child">
@@ -740,12 +785,58 @@
   </div>
 </section>
 
+<!-- ══ S4b: FOOD GALLERY ══ -->
+<section id="s4b">
+  <div class="gallery-header reveal">
+    <div class="gallery-title-block">
+      <div class="section-eyebrow">The food</div>
+      <h2 class="section-title" style="margin-bottom:0;">
+        Modern European.<br><span class="accent">Asian soul.</span>
+      </h2>
+    </div>
+    <p class="gallery-note reveal reveal-delay-2">
+      Every dish tells you where it came from. European technique, Asian instinct, honest ingredients. Nothing on the plate without a reason.
+    </p>
+  </div>
+
+  <div class="food-grid stagger-parent">
+    <!-- Col 1: tall left -->
+    <div class="food-cell tall stagger-child">
+      <img src="img_spoon.jpg" alt="Spoon amuse-bouche with flower">
+      <span class="food-cell-label">Amuse-bouche</span>
+    </div>
+    <!-- Col 2: two stacked -->
+    <div class="food-cell stagger-child">
+      <img src="img_canape.jpg" alt="Brioche canapé" style="object-position: center 40%;">
+      <span class="food-cell-label">Canapé</span>
+    </div>
+    <div class="food-cell stagger-child">
+      <img src="img_tartlet.jpg" alt="Tartlet with edible flowers" style="object-position: center 30%;">
+      <span class="food-cell-label">Passed bites</span>
+    </div>
+    <!-- Col 3: two stacked -->
+    <div class="food-cell stagger-child">
+      <img src="img_main.jpg" alt="Main course" style="object-position: center 30%;">
+      <span class="food-cell-label">Main</span>
+    </div>
+    <div class="food-cell stagger-child">
+      <img src="img_dessert.jpg" alt="Dessert" style="object-position: center;">
+      <span class="food-cell-label">Dessert</span>
+    </div>
+    <!-- Col 4: tall right -->
+    <div class="food-cell tall stagger-child">
+      <img src="img_share.jpg" alt="Guests sharing a course" style="object-position: center 25%;">
+      <span class="food-cell-label">At the table</span>
+    </div>
+  </div>
+</section>
+
 <!-- ══ S5: THE EXPERIENCE ══ -->
 <section id="s5">
   <div class="container">
     <div class="experience-layout">
       <div class="exp-photo reveal">
-        <img src="img_food2.jpg" alt="The Dinner Club atmosphere">
+        <img src="img_food2.jpg" alt="The Dinner Club atmosphere" style="object-position: center 40%;">
       </div>
       <div>
         <div class="section-eyebrow reveal">The guest journey</div>
