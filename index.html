@@ -32,11 +32,11 @@
   /* ── Persistent TDC watermark ── */
   .tdc-watermark {
     position: fixed; top: 1.4rem; left: 1.8rem; z-index: 999;
-    opacity: 0; transition: opacity 0.5s var(--ease-out);
+    opacity: 1; transition: opacity 0.5s var(--ease-out);
     pointer-events: none;
   }
-  .tdc-watermark.show { opacity: 1; }
-  .tdc-watermark img { width: 52px; height: auto; display: block; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.5)); }
+  .tdc-watermark.hidden { opacity: 0; }
+  .tdc-watermark img { width: 72px; height: auto; display: block; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.7)); }
 
   /* Progress bar */
   .progress-bar {
@@ -339,6 +339,30 @@
   .exp-content-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--white); }
   .exp-content-body { font-size: 0.85rem; line-height: 1.65; color: var(--white-dim); }
 
+  /* ── S5b: COMMUNITY ── */
+  .community-stats {
+    display: flex; align-items: flex-start; gap: 0; margin-bottom: 3rem;
+    border: 1px solid var(--white-faint);
+  }
+  .comm-stat { padding: 2rem 2.5rem; flex: 1; }
+  .comm-divider { width: 1px; background: var(--white-faint); align-self: stretch; }
+  .comm-num {
+    font-family: 'Fraunces', serif; font-weight: 900;
+    font-size: 1.3rem; color: var(--coral); line-height: 1.1; margin-bottom: 0.5rem;
+  }
+  .comm-label { font-size: 0.78rem; color: var(--white-dim); line-height: 1.5; }
+  .comm-quote {
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.3rem); line-height: 1.55;
+    color: var(--white-dim); border-left: 3px solid var(--coral);
+    padding: 0 0 0 1.5rem; max-width: 54ch;
+  }
+  .comm-quote cite {
+    display: block; margin-top: 0.8rem;
+    font-style: normal; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.15em; color: var(--coral); text-transform: uppercase;
+  }
+
   /* ── S6: WHY GRAND HYATT ── */
   #s6 { background: #080E18; }
 
@@ -511,7 +535,7 @@
 
 <div class="progress-bar" id="progressBar"></div>
 <nav class="nav-dots" id="navDots"></nav>
-<div class="slide-counter" id="slideCounter">01 / 10</div>
+<div class="slide-counter" id="slideCounter">01 / 12</div>
 
 <!-- TDC logo — persists on all slides except cover -->
 <div class="tdc-watermark" id="tdcWatermark">
@@ -582,8 +606,8 @@
           We aren't a brand.<br>We're a <span class="accent">table</span>.
         </h2>
         <div class="section-body reveal reveal-delay-2">
-          <p>The Dinner Club started in a Singapore apartment with no guest list, no PR, and no plan. Stefan cooked. Strangers came. By the time dessert was down, they were already friends.</p>
-          <p>That instinct became something intentional. Every dinner since has been the same: real food, real conversation, the kind of evening people talk about for months. Every seat, sold out — every time.</p>
+          <p>The Dinner Club started in a Singapore apartment with no guest list, no PR, and no plan. Stefan cooked. Strangers came. By the time dessert was down, they were already making plans for the week after.</p>
+          <p>That instinct became something intentional — and something bigger than we expected. People who met at our very first supper clubs are still a group today. They came as strangers. They left as friends. Now they come back together, as a table, because The Dinner Club is where their friendship started.</p>
           <p>Stefan trained across five Michelin-starred kitchens — including Ciel Bleu at Okura Hotel Amsterdam and La Rive at InterContinental Amstel. He knows how hotel kitchens work, and how to make them feel like anything but. His most recent role was Head Chef at Somma (Lo & Behold Group), recognised by Michelin Guide Singapore, Tatler Asia Pacific, and Condé Nast Traveler in 2025.</p>
         </div>
       </div>
@@ -689,28 +713,28 @@
       The Dinner Club<br>comes to <span class="accent">Kuala Lumpur</span>
     </h2>
     <p class="section-body reveal reveal-delay-2" style="margin-bottom:0">
-      Two nights. Two full seatings. A supper club format that doesn't exist in KL yet — intimate, chef-led, ticketed, full. Not a pop-up. Not an event. A room that feels like the best dinner party you've ever been to, at a hotel that knows how to hold that energy.
+      Two nights. Two long tables. A supper club format that doesn't exist in KL yet — one long table where strangers sit next to strangers, a multi-course chef's menu unfolds, and by the end of the evening the room is one conversation. This is what The Dinner Club does. This is what we're bringing to Grand Hyatt KL.
     </p>
     <div class="concept-grid stagger-parent" style="margin-top:2.5rem">
       <div class="concept-cell stagger-child">
         <span class="cell-icon">Night 01</span>
         <div class="cell-title">Supper Club — Night One</div>
-        <div class="cell-body">Open waitlist. Full seating. One or two long tables — everyone facing each other, no separation. The format forces connection in a way a restaurant never could. Media and press welcome to join as guests.</div>
+        <div class="cell-body">Open waitlist. Full seating. One or two long tables — everyone faces each other, no private groups, no separation. The format is intentional: it forces the kind of conversation that only happens when strangers share a table with nowhere to hide. Media and press welcome as guests.</div>
       </div>
       <div class="concept-cell stagger-child">
         <span class="cell-icon">Night 02</span>
         <div class="cell-title">Supper Club — Night Two</div>
-        <div class="cell-body">A second night means a second room of people who heard about the first. By Night Two, the buzz is already doing the work. Waitlist overflow, word of mouth, the energy in the room when everyone wants to be exactly where they are.</div>
+        <div class="cell-body">By Night Two, the people at the first dinner are already talking. Word travels fast when a room full of strangers ends the evening as friends. The second night fills itself — and it fills with people who already know they want to be there.</div>
       </div>
       <div class="concept-cell stagger-child">
-        <span class="cell-icon">Format</span>
+        <span class="cell-icon">The menu</span>
         <div class="cell-title">Multi-course chef's menu</div>
-        <div class="cell-body">Stefan works with the Grand Hyatt KL kitchen team to create a menu honest about where it comes from — Singapore sensibility, KL ingredients, European technique. One seating per night. 25–40 covers.</div>
+        <div class="cell-body">Stefan and the Grand Hyatt KL kitchen team create a menu together — honest about where it comes from. Singapore sensibility, KL ingredients, European technique. Every dish has a reason. The table learns it as the night unfolds. One seating per night. 25–40 covers.</div>
       </div>
       <div class="concept-cell stagger-child">
-        <span class="cell-icon">The table</span>
+        <span class="cell-icon">The design</span>
         <div class="cell-title">Long table. One conversation.</div>
-        <div class="cell-body">The Dinner Club is built around one or two long tables — not a room of separate parties. Strangers sit next to strangers. The format is the magic. By dessert, the whole room is one conversation.</div>
+        <div class="cell-body">No round tables. No safe corners for groups who already know each other. One long table — or two — so the whole room is part of one evening. This is the design. By dessert, a guest at one end is laughing at something a stranger said at the other. That's not luck. That's the format.</div>
       </div>
     </div>
   </div>
@@ -754,18 +778,55 @@
             <span class="exp-num">04</span>
             <div>
               <div class="exp-content-title">The moment</div>
-              <div class="exp-content-body">Somewhere between the main and dessert, the room changes. The volume lifts. People who didn't know each other an hour ago are making plans for next week. That's the whole point.</div>
+              <div class="exp-content-body">Somewhere between the main and dessert, the room changes. The volume lifts. Someone at the far end of the table says something that makes the whole table laugh. People who didn't know each other two hours ago are swapping numbers. We've watched this happen from our very first supper club — and those same people are still a group today.</div>
             </div>
           </div>
           <div class="exp-step stagger-child">
             <span class="exp-num">05</span>
             <div>
               <div class="exp-content-title">The close</div>
-              <div class="exp-content-body">No rush. No bill-drop energy. The evening ends when the room decides it should. Guests leave with something to talk about. That's how the waitlist for the next one fills itself.</div>
+              <div class="exp-content-body">No rush. No bill-drop energy. The evening ends when the room decides it should. Some guests will be there for the next one. Some will bring a friend. Some will come back together as a group — because The Dinner Club is where their friendship started.</div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S5b: COMMUNITY ══ -->
+<section id="s5b" style="background: var(--near-black); position: relative;">
+  <div style="position:absolute;inset:0;background-image:url('img_dinner.jpg');background-size:cover;background-position:center 30%;filter:brightness(0.15) saturate(0.4);"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 50%, rgba(40,66,35,0.5) 0%, rgba(13,13,13,0.92) 100%);"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="max-width: 820px;">
+      <div class="section-eyebrow reveal">The proof</div>
+      <h2 class="section-title reveal reveal-delay-1" style="font-size: clamp(2.4rem, 5vw, 4.2rem);">
+        Strangers at dinner.<br><span class="accent">Friends at the next one.</span>
+      </h2>
+      <p class="section-body reveal reveal-delay-2" style="font-size:1.05rem; max-width:60ch; margin-bottom: 3rem;">
+        The real proof of The Dinner Club isn't the sold-out seats. It's what happens after. Groups that met at our very first supper clubs in Singapore are still coming back — together. Not because they saw a post. Not because of a discount. Because they sat next to a stranger at a long table, shared a meal, and left as friends. Now they come back as a group, and they bring people.
+      </p>
+      <div class="community-stats reveal reveal-delay-3">
+        <div class="comm-stat">
+          <div class="comm-num">Every time</div>
+          <div class="comm-label">Sold out — no exceptions</div>
+        </div>
+        <div class="comm-divider"></div>
+        <div class="comm-stat">
+          <div class="comm-num">Returning groups</div>
+          <div class="comm-label">Guests who met at early dinners, coming back together</div>
+        </div>
+        <div class="comm-divider"></div>
+        <div class="comm-stat">
+          <div class="comm-num">Zero ads</div>
+          <div class="comm-label">Every seat filled by word of mouth and waitlist</div>
+        </div>
+      </div>
+      <blockquote class="comm-quote reveal reveal-delay-4">
+        "We put strangers at the same table. That's the whole design. What they build from there — we can't manufacture that. We just set the conditions."
+        <cite>— Stefan Kam</cite>
+      </blockquote>
     </div>
   </div>
 </section>
@@ -977,8 +1038,8 @@ const sectionObs = new IntersectionObserver(entries => {
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
         progressBar.style.width = ((idx + 1) / sections.length * 100) + '%';
         slideCounterEl.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(sections.length).padStart(2,'0');
-        // Show TDC watermark on all slides except cover
-        tdcWatermark.classList.toggle('show', e.target !== coverSection);
+        // Hide TDC watermark on cover (it appears large there already)
+        tdcWatermark.classList.toggle('hidden', e.target === coverSection);
       }
     }
   });
@@ -995,6 +1056,7 @@ document.addEventListener('keydown', e => {
 
 // Cover entrance
 window.addEventListener('load', () => {
+  tdcWatermark.classList.add('hidden'); // hide on cover at start
   setTimeout(() => document.getElementById('dualLogo').classList.add('visible'), 200);
   setTimeout(() => document.getElementById('coverEyebrow').classList.add('visible'), 500);
   setTimeout(() => document.getElementById('coverTitle').classList.add('visible'), 700);
