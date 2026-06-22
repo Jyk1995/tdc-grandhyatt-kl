@@ -239,6 +239,10 @@
     font-size: 2.4rem; line-height: 1; color: var(--white);
   }
   .stat-label { font-size: 0.72rem; color: var(--white-dim); margin-top: 0.25rem; letter-spacing: 0.04em; }
+  .kitchen-creds { margin-top: 1.6rem; display: flex; flex-direction: column; gap: 0.45rem; }
+  .kc-row { display: flex; align-items: baseline; gap: 0.8rem; }
+  .kc-stars { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--coral); min-width: 2.8rem; letter-spacing: 0.05em; }
+  .kc-name { font-size: 0.78rem; color: var(--white-dim); letter-spacing: 0.03em; }
 
   /* ── S2b: BRAND MARQUEE ── */
   #s2b { background: var(--near-black); flex-direction: column; gap: 0; padding: 5rem 0; overflow: hidden; }
@@ -478,6 +482,16 @@
   .need-num { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--coral); padding-top: 0.15rem; flex-shrink: 0; letter-spacing: 0.1em; }
   .need-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 0.4rem; }
   .need-body { font-size: 0.8rem; line-height: 1.6; color: var(--white-dim); }
+  .partnership-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--white-faint); margin-top: 3rem; }
+  .partnership-col { background: var(--green-mid); padding: 0; }
+  .partnership-col-header { padding: 1.4rem 2.2rem; border-bottom: 1px solid var(--white-faint); }
+  .partnership-col-header span { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .partnership-col.tdc .partnership-col-header span { color: var(--coral); }
+  .partnership-col.gh .partnership-col-header span { color: var(--gold); }
+  .partnership-item { padding: 1.4rem 2.2rem; border-bottom: 1px solid var(--white-faint); }
+  .partnership-item:last-child { border-bottom: none; }
+  .partnership-item-title { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+  .partnership-item-body { font-size: 0.78rem; line-height: 1.55; color: var(--white-dim); }
 
   /* ── S10: CLOSE ── */
   #s10 { background: var(--near-black); flex-direction: column; }
@@ -558,7 +572,7 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .two-col, .marketing-cols, .needs-grid, .experience-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .two-col, .marketing-cols, .needs-grid, .experience-layout, .partnership-cols { grid-template-columns: 1fr; gap: 2.5rem; }
     .concept-grid, .synergy-grid { grid-template-columns: 1fr; }
     .synergy-grid { grid-template-columns: 1fr 1fr; }
     .nav-dots { display: none; }
@@ -651,9 +665,17 @@
           We aren't a brand.<br>We're a <span class="accent">table</span>.
         </h2>
         <div class="section-body reveal reveal-delay-2">
-          <p>The Dinner Club started in a Singapore apartment with no guest list, no PR, and no plan. Stefan cooked. Strangers came. By the time dessert was down, they were already making plans for the week after.</p>
-          <p>That instinct became something intentional — and something bigger than we expected. People who met at our very first supper clubs are still a group today. They came as strangers. They left as friends. Now they come back together, as a table, because The Dinner Club is where their friendship started.</p>
-          <p>Stefan trained across five Michelin-starred kitchens — including Ciel Bleu at Okura Hotel Amsterdam and La Rive at InterContinental Amstel. He knows how hotel kitchens work, and how to make them feel like anything but. His most recent role was Head Chef at Somma (Lo & Behold Group), recognised by Michelin Guide Singapore, Tatler Asia Pacific, and Condé Nast Traveler in 2025.</p>
+          <p>Stefan cooked. Strangers came. By dessert, they were making plans for the week after. That's The Dinner Club.</p>
+          <p>Seven Michelin starred kitchens — five of them hotel restaurants. Most recently Head Chef at Somma, recognised by Michelin Guide Singapore, Tatler, and Condé Nast Traveler in 2025.</p>
+          <div class="kitchen-creds">
+            <div class="kc-row"><span class="kc-stars">★★★</span><span class="kc-name">De Librije — Hotel De Librije, Zwolle</span></div>
+            <div class="kc-row"><span class="kc-stars">★★</span><span class="kc-name">Alchemist — Copenhagen</span></div>
+            <div class="kc-row"><span class="kc-stars">★★</span><span class="kc-name">Bord'eau — Hotel de l'Europe, Amsterdam</span></div>
+            <div class="kc-row"><span class="kc-stars">★★</span><span class="kc-name">Ciel Bleu — Hotel Okura, Amsterdam</span></div>
+            <div class="kc-row"><span class="kc-stars">★★</span><span class="kc-name">Restaurant 212 — Amsterdam</span></div>
+            <div class="kc-row"><span class="kc-stars">★</span><span class="kc-name">La Rive — Amstel Hotel, Amsterdam</span></div>
+            <div class="kc-row"><span class="kc-stars">★</span><span class="kc-name">Table 65 — Hotel Michael, Singapore</span></div>
+          </div>
         </div>
       </div>
       <div>
@@ -666,8 +688,8 @@
             <div class="stat-label">Personal dinners hosted by Stefan</div>
           </div>
           <div class="stat-item stagger-child">
-            <div class="stat-num">5★</div>
-            <div class="stat-label">Michelin kitchens, incl. two hotel restaurants</div>
+            <div class="stat-num">13★</div>
+            <div class="stat-label">Michelin stars across 7 kitchens, 5 in hotels</div>
           </div>
           <div class="stat-item stagger-child">
             <div class="stat-num">1–2</div>
@@ -758,28 +780,28 @@
       The Dinner Club<br>comes to <span class="accent">Kuala Lumpur</span>
     </h2>
     <p class="section-body reveal reveal-delay-2" style="margin-bottom:0">
-      Two nights. Two long tables. A supper club format that doesn't exist in KL yet — one long table where strangers sit next to strangers, a multi-course chef's menu unfolds, and by the end of the evening the room is one conversation. This is what The Dinner Club does. This is what we're bringing to Grand Hyatt KL.
+      Two nights. One long table. Strangers sit next to strangers, a tasting menu unfolds, and by the end of the evening the room is one conversation.
     </p>
     <div class="concept-grid stagger-parent" style="margin-top:2.5rem">
       <div class="concept-cell stagger-child">
         <span class="cell-icon">Night 01</span>
         <div class="cell-title">Supper Club — Night One</div>
-        <div class="cell-body">Open waitlist. Full seating. One or two long tables — everyone faces each other, no private groups, no separation. The format is intentional: it forces the kind of conversation that only happens when strangers share a table with nowhere to hide. Media and press welcome as guests.</div>
+        <div class="cell-body">Open waitlist. One long table — everyone faces each other. No private groups. Media and press welcome as guests.</div>
       </div>
       <div class="concept-cell stagger-child">
         <span class="cell-icon">Night 02</span>
         <div class="cell-title">Supper Club — Night Two</div>
-        <div class="cell-body">By Night Two, the people at the first dinner are already talking. Word travels fast when a room full of strangers ends the evening as friends. The second night fills itself — and it fills with people who already know they want to be there.</div>
+        <div class="cell-body">Word travels fast when strangers end an evening as friends. Night Two fills itself.</div>
       </div>
       <div class="concept-cell stagger-child">
         <span class="cell-icon">The menu</span>
-        <div class="cell-title">Multi-course chef's menu</div>
-        <div class="cell-body">Stefan and the Grand Hyatt KL kitchen team create a menu together — honest about where it comes from. Singapore sensibility, KL ingredients, European technique. Every dish has a reason. The table learns it as the night unfolds. One seating per night. 25–40 covers.</div>
+        <div class="cell-title">Chef's tasting menu</div>
+        <div class="cell-body">Stefan and the Grand Hyatt KL team build the menu together. Singapore sensibility, KL ingredients, European technique. One seating per night. 25–40 covers.</div>
       </div>
       <div class="concept-cell stagger-child">
         <span class="cell-icon">The design</span>
         <div class="cell-title">Long table. One conversation.</div>
-        <div class="cell-body">No round tables. No safe corners for groups who already know each other. One long table — or two — so the whole room is part of one evening. This is the design. By dessert, a guest at one end is laughing at something a stranger said at the other. That's not luck. That's the format.</div>
+        <div class="cell-body">No round tables. No safe corners. One long table — the whole room is one evening. By dessert, one end is laughing at something the other end said. That's not luck. That's the format.</div>
       </div>
     </div>
   </div>
@@ -802,31 +824,31 @@
   <div class="food-grid stagger-parent">
     <!-- Col 1: tall left -->
     <div class="food-cell tall stagger-child">
-      <img src="img_spoon.jpg" alt="Spoon amuse-bouche with flower">
-      <span class="food-cell-label">Amuse-bouche</span>
+      <img src="img_cc_chef.jpg" alt="Stefan plating at the supper club" style="object-position: center center;">
+      <span class="food-cell-label">The kitchen</span>
     </div>
     <!-- Col 2: two stacked -->
     <div class="food-cell stagger-child">
-      <img src="img_canape.jpg" alt="Brioche canapé" style="object-position: center 40%;">
-      <span class="food-cell-label">Canapé</span>
+      <img src="img_cc_starter.jpg" alt="Starter course" style="object-position: center 55%;">
+      <span class="food-cell-label">Starter</span>
     </div>
     <div class="food-cell stagger-child">
-      <img src="img_tartlet.jpg" alt="Tartlet with edible flowers" style="object-position: center 30%;">
-      <span class="food-cell-label">Passed bites</span>
+      <img src="img_cc_pasta.jpg" alt="Pasta course" style="object-position: center 40%;">
+      <span class="food-cell-label">Pasta</span>
     </div>
     <!-- Col 3: two stacked -->
     <div class="food-cell stagger-child">
-      <img src="img_main.jpg" alt="Main course" style="object-position: center 30%;">
+      <img src="img_cc_main.jpg" alt="Main course" style="object-position: center 40%;">
       <span class="food-cell-label">Main</span>
     </div>
     <div class="food-cell stagger-child">
-      <img src="img_dessert.jpg" alt="Dessert" style="object-position: center;">
-      <span class="food-cell-label">Dessert</span>
+      <img src="img_cc_spread.jpg" alt="Spread of courses" style="object-position: center 65%;">
+      <span class="food-cell-label">The spread</span>
     </div>
     <!-- Col 4: tall right -->
     <div class="food-cell tall stagger-child">
-      <img src="img_share.jpg" alt="Guests sharing a course" style="object-position: center 25%;">
-      <span class="food-cell-label">At the table</span>
+      <img src="img_cc_table.jpg" alt="The long table" style="object-position: center top;">
+      <span class="food-cell-label">The long table</span>
     </div>
   </div>
 </section>
@@ -848,35 +870,35 @@
             <span class="exp-num">01</span>
             <div>
               <div class="exp-content-title">The arrival</div>
-              <div class="exp-content-body">Guests don't walk into a restaurant. They walk into a room that's already warm. Music low, candles lit, the kitchen already moving. The atmosphere says: you're exactly where you're supposed to be.</div>
+              <div class="exp-content-body">Music low, candles lit, the kitchen already moving. A room that's warm before anyone sits down.</div>
             </div>
           </div>
           <div class="exp-step stagger-child">
             <span class="exp-num">02</span>
             <div>
               <div class="exp-content-title">The welcome</div>
-              <div class="exp-content-body">Stefan introduces himself and the evening. Not a speech — a conversation. The kind of table talk that makes strangers turn to each other before the first course is down.</div>
+              <div class="exp-content-body">Stefan introduces the evening. Not a speech — a conversation.</div>
             </div>
           </div>
           <div class="exp-step stagger-child">
             <span class="exp-num">03</span>
             <div>
               <div class="exp-content-title">The menu</div>
-              <div class="exp-content-body">Multi-course, story-driven. Stefan and the Grand Hyatt KL chef team cook together. Each dish has a reason. The table learns it as the night unfolds.</div>
+              <div class="exp-content-body">Multiple courses, every one with a story. Each dish has a reason the table learns as the night unfolds.</div>
             </div>
           </div>
           <div class="exp-step stagger-child">
             <span class="exp-num">04</span>
             <div>
               <div class="exp-content-title">The moment</div>
-              <div class="exp-content-body">Somewhere between the main and dessert, the room changes. The volume lifts. Someone at the far end of the table says something that makes the whole table laugh. People who didn't know each other two hours ago are swapping numbers. We've watched this happen from our very first supper club — and those same people are still a group today.</div>
+              <div class="exp-content-body">Somewhere between the main and dessert, the room changes. People who didn't know each other two hours ago are swapping numbers.</div>
             </div>
           </div>
           <div class="exp-step stagger-child">
             <span class="exp-num">05</span>
             <div>
               <div class="exp-content-title">The close</div>
-              <div class="exp-content-body">No rush. No bill-drop energy. The evening ends when the room decides it should. Some guests will be there for the next one. Some will bring a friend. Some will come back together as a group — because The Dinner Club is where their friendship started.</div>
+              <div class="exp-content-body">No rush. The evening ends when the room decides. Some will be back for the next one. Some will bring people.</div>
             </div>
           </div>
         </div>
@@ -896,7 +918,7 @@
         Strangers at dinner.<br><span class="accent">Friends at the next one.</span>
       </h2>
       <p class="section-body reveal reveal-delay-2" style="font-size:1.05rem; max-width:60ch; margin-bottom: 3rem;">
-        The real proof of The Dinner Club isn't the sold-out seats. It's what happens after. Groups that met at our very first supper clubs in Singapore are still coming back — together. Not because they saw a post. Not because of a discount. Because they sat next to a stranger at a long table, shared a meal, and left as friends. Now they come back as a group, and they bring people.
+        The real proof isn't the sold out seats. It's that groups who met at our first supper clubs are still coming back — together.
       </p>
       <div class="community-stats reveal reveal-delay-3">
         <div class="comm-stat">
@@ -930,38 +952,38 @@
       Grand Hyatt KL<br>is the <span style="color:var(--gold)">right room</span>
     </h2>
     <p class="section-body reveal reveal-delay-2" style="max-width:58ch;">
-      The Dinner Club brings the energy, the format, and the following. Grand Hyatt brings the kitchen, the space, the service infrastructure, and the address. Neither of us could do what this becomes, alone.
+      TDC brings the format and the following. Grand Hyatt brings the kitchen, the space, and the address.
     </p>
     <div class="synergy-grid stagger-parent">
       <div class="synergy-card stagger-child">
-        <span class="synergy-label">★★ ★★★ ★★</span>
+        <span class="synergy-label">5 hotel kitchens · 13 ★</span>
         <div class="synergy-title">Hotel kitchen experience</div>
-        <div class="synergy-body">Stefan trained at Ciel Bleu (Okura Hotel, Amsterdam ★★) and La Rive (InterContinental Amstel ★). He doesn't need to learn how hotel kitchens work — he knows how to make them feel like somewhere else entirely.</div>
+        <div class="synergy-body">Five of Stefan's seven Michelin kitchens were hotel restaurants. He doesn't need to learn how hotel kitchens work. He just needs the right one.</div>
       </div>
       <div class="synergy-card stagger-child">
         <span class="synergy-label">Address</span>
         <div class="synergy-title">Central KL, world-class kitchen</div>
-        <div class="synergy-body">The Dinner Club draws people who want to be somewhere worth going. Grand Hyatt KL is an address the city already trusts, with a kitchen brigade that can hold the standard Stefan's menus demand.</div>
+        <div class="synergy-body">An address the city already trusts, with a kitchen that can hold the standard.</div>
       </div>
       <div class="synergy-card stagger-child">
         <span class="synergy-label">Service</span>
-        <div class="synergy-title">5-star meets supper club</div>
-        <div class="synergy-body">Supper club energy lives or dies on the room's ability to make guests feel looked after without making them feel managed. Grand Hyatt's service culture is built for exactly that.</div>
+        <div class="synergy-title">Five star meets supper club</div>
+        <div class="synergy-body">The format lives or dies on how guests feel. Grand Hyatt's service culture is built for exactly that.</div>
       </div>
       <div class="synergy-card stagger-child">
         <span class="synergy-label">Audience</span>
-        <div class="synergy-title">Cross-border following</div>
-        <div class="synergy-body">The Dinner Club has a loyal following in Singapore that travels. KL is 45 minutes by air. Expect cross-border guests to fill a meaningful share of both nights.</div>
+        <div class="synergy-title">A following that travels</div>
+        <div class="synergy-body">TDC has a following in Singapore that travels. KL is 45 minutes by air.</div>
       </div>
       <div class="synergy-card stagger-child">
         <span class="synergy-label">Signal</span>
         <div class="synergy-title">Two brands, one table</div>
-        <div class="synergy-body">The Dinner Club's name on a Grand Hyatt reservation carries a clear signal: this isn't a casual dinner. The two brands together raise the perceived value of both.</div>
+        <div class="synergy-body">Together, the two names raise the perceived value of both.</div>
       </div>
       <div class="synergy-card stagger-child">
         <span class="synergy-label">Scale</span>
         <div class="synergy-title">Global pipeline</div>
-        <div class="synergy-body">One successful run in KL is a proof of concept for every Grand Hyatt city in the world. We're not pitching a dinner. We're pitching a format that scales.</div>
+        <div class="synergy-body">KL is the proof of concept every Grand Hyatt city needs. We're not pitching a dinner. We're pitching a format.</div>
       </div>
     </div>
   </div>
@@ -978,20 +1000,17 @@
       <div class="reveal reveal-delay-2">
         <div class="mkt-block-title">What we do</div>
         <ul class="mkt-list">
-          <li><strong>Social-first announcement</strong> — teaser post from @thedinnerclub.sg + @stefankam before a single ticket goes on sale. The waitlist fills before we open anything.</li>
-          <li><strong>Behind-the-scenes content</strong> — Stefan and the Grand Hyatt KL chefs in the kitchen together. Two chef worlds colliding is a story people share.</li>
-          <li><strong>Press and PR</strong> — KL food press, lifestyle media, hotel trade coverage. Media guests join as part of the evening, not as a separate function.</li>
-          <li><strong>Cross-border reach</strong> — Singapore audience sees the KL dates. KL audience sees the Singapore pedigree. Both sell the other.</li>
-          <li><strong>Waitlist strategy</strong> — opens 3 weeks before. Scarcity drives demand. If it sells out faster than expected, that's the story.</li>
+          <li><strong>Social first announcement</strong> — teaser from @thedinnerclub.sg + @stefankam before a single ticket goes on sale. The waitlist fills before we open anything.</li>
+          <li><strong>Behind the scenes content</strong> — Stefan and the Grand Hyatt KL chefs cooking together. Two chef worlds colliding is a story people share. Grand Hyatt can use every frame.</li>
+          <li><strong>Press and media</strong> — KL food press, lifestyle media, hotel trade. Media guests join as part of the evening, not a separate function.</li>
         </ul>
       </div>
       <div class="reveal reveal-delay-3">
-        <div class="mkt-block-title">What we don't do</div>
+        <div class="mkt-block-title">How it sounds</div>
         <ul class="mkt-list">
-          <li><strong>No "exclusive" or "curated" language</strong> — this isn't a velvet rope. The copy sounds like a smart friend telling you about the best dinner they've ever been to.</li>
-          <li><strong>No hotel-brochure photography</strong> — content is candid, warm, real. Plating shots, kitchen chaos, the moment someone laughs. Not staged wide shots of an empty room.</li>
-          <li><strong>No generic event listings</strong> — we don't list on aggregator sites. Discovery is word of mouth and social. That's what keeps the waitlist honest.</li>
-          <li><strong>Food and experience first, always</strong> — every piece of content leads with the meal, the people, and the evening. That's what travels. That's what sells the next seat.</li>
+          <li><strong>No "exclusive" or "curated" language</strong> — sounds like a smart friend, not a velvet rope. That's what makes people actually want to come.</li>
+          <li><strong>No hotel brochure photography</strong> — candid, warm, real. Plating shots, kitchen chaos, the moment someone laughs. Not staged wide shots of an empty room.</li>
+          <li><strong>Food and people first, always</strong> — every piece of content leads with the meal and the room. That's what travels. That's what sells the next seat.</li>
         </ul>
       </div>
     </div>
@@ -1006,7 +1025,7 @@
       KL is <span class="accent">chapter one</span>
     </h2>
     <p class="section-body reveal reveal-delay-2" style="max-width:56ch;">
-      Two sold-out nights in Kuala Lumpur proves the format works in a new market. That's the proof of concept every Grand Hyatt property in the world needs to say yes to the same conversation.
+      Two sold out nights in Kuala Lumpur proves the format works in a new market. That's the proof of concept every Grand Hyatt property in the world needs to say yes to the same conversation.
     </p>
     <div class="city-row reveal reveal-delay-3">
       <div class="city-chip highlight">Kuala Lumpur ← start here</div>
@@ -1027,43 +1046,53 @@
   </div>
 </section>
 
-<!-- ══ S9: WHAT WE NEED ══ -->
+<!-- ══ S9: THE PARTNERSHIP ══ -->
 <section id="s9">
   <div class="container">
-    <div class="section-eyebrow reveal">What makes this possible</div>
+    <div class="section-eyebrow reveal">The collaboration</div>
     <h2 class="section-title reveal reveal-delay-1">
-      What we need<br>from <span class="accent">Grand Hyatt KL</span>
+      What each side<br>brings to the <span class="accent">table</span>
     </h2>
     <p class="section-body reveal reveal-delay-2" style="margin-bottom:0;">
-      We bring the concept, the content, the chef, and the audience. Here's what the partnership needs from your side to make two nights of KL's best supper club happen.
+      This is a genuine collaboration between two brands that each have something the other can't manufacture alone.
     </p>
-    <div class="needs-grid stagger-parent">
-      <div class="need-cell stagger-child">
-        <span class="need-num">01</span>
-        <div>
-          <div class="need-title">Space & atmosphere</div>
-          <div class="need-body">A private dining room or configurable space that seats 25–40 for two evenings. Lighting that can go low. A room that can feel like it belongs to the guests for the night.</div>
+    <div class="partnership-cols stagger-parent">
+      <div class="partnership-col tdc stagger-child">
+        <div class="partnership-col-header"><span>The Dinner Club brings</span></div>
+        <div class="partnership-item">
+          <div class="partnership-item-title">A crowd Grand Hyatt can't buy</div>
+          <div class="partnership-item-body">Young, social, food-forward. The audience that follows TDC doesn't find Grand Hyatt through traditional hotel marketing. This puts the hotel in front of them directly.</div>
+        </div>
+        <div class="partnership-item">
+          <div class="partnership-item-title">A sold out track record</div>
+          <div class="partnership-item-body">Every event we've run has sold out. Grand Hyatt takes zero risk on empty seats. The demand exists before a single ticket goes on sale.</div>
+        </div>
+        <div class="partnership-item">
+          <div class="partnership-item-title">Content both brands can use</div>
+          <div class="partnership-item-body">Stefan's kitchen, the long table, the moment strangers become friends. Ready-to-publish stories across TDC's channels — and Grand Hyatt's.</div>
+        </div>
+        <div class="partnership-item">
+          <div class="partnership-item-title">A format that scales</div>
+          <div class="partnership-item-body">Two sold out nights in KL is the proof of concept every Grand Hyatt city needs to have the same conversation.</div>
         </div>
       </div>
-      <div class="need-cell stagger-child">
-        <span class="need-num">02</span>
-        <div>
-          <div class="need-title">Kitchen access & collaboration</div>
-          <div class="need-body">Stefan works alongside the Grand Hyatt KL kitchen team. Joint menu development, shared prep time in the days before. The collaboration is real — not symbolic.</div>
+      <div class="partnership-col gh stagger-child">
+        <div class="partnership-col-header"><span>Grand Hyatt provides</span></div>
+        <div class="partnership-item">
+          <div class="partnership-item-title">The pool — a hidden venue</div>
+          <div class="partnership-item-body">The pool terrace at Grand Hyatt KL is cozy, tucked away, unlike any dining room. Guests walk into the hotel and find something they weren't expecting. That surprise is part of the evening.</div>
         </div>
-      </div>
-      <div class="need-cell stagger-child">
-        <span class="need-num">03</span>
-        <div>
-          <div class="need-title">F&B partnership</div>
-          <div class="need-body">Front-of-house service managed by Grand Hyatt's team. F&B structured as a revenue-share or fixed arrangement — open to discussion on what works best for both sides.</div>
+        <div class="partnership-item">
+          <div class="partnership-item-title">The kitchen and the team</div>
+          <div class="partnership-item-body">Stefan works alongside the Grand Hyatt KL kitchen team. Joint menu development, shared prep. The collaboration is real.</div>
         </div>
-      </div>
-      <div class="need-cell stagger-child">
-        <span class="need-num">04</span>
-        <div>
-          <div class="need-title">Co-promotion</div>
-          <div class="need-body">Grand Hyatt KL shares across their owned channels — social, email, in-hotel. Focused on the food, the chefs, and the experience. We handle all content creation.</div>
+        <div class="partnership-item">
+          <div class="partnership-item-title">Front of house service</div>
+          <div class="partnership-item-body">Grand Hyatt's service standards applied to our format. F&B structured as a revenue share or fixed arrangement — open to discussion.</div>
+        </div>
+        <div class="partnership-item">
+          <div class="partnership-item-title">Co-promotion</div>
+          <div class="partnership-item-body">Grand Hyatt promotes across social, email, and in-hotel channels. TDC handles all content creation. Both audiences see both brands.</div>
         </div>
       </div>
     </div>
